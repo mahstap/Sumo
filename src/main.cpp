@@ -42,8 +42,8 @@ void setup(){
 
   //declarando pinos dos sensores 
   pinMode (S1, OUTPUT);
-  pinMode (S2,OUTPUT);
-  pinMode (S3,OUTPUT);
+  pinMode (S2, OUTPUT);
+  pinMode (S3, OUTPUT);
 
   //pinos em nivel baixo
   digitalWrite (S1, LOW); 
@@ -132,4 +132,5 @@ void loc(){
  {
 
   }
+  else
 }
