@@ -20,26 +20,48 @@
 // pino do botao fail safe definido
 #define FS 2
 
-float dist1; // Variavel de leitura da distancia
-float dist2; // Variavel de leitura da distancia
-float dist3; // Variavel de leitura da distancia
+//variavel de distancia dos sensores
+float dist1; 
+float dist2; 
+float dist3; 
 
-void leitura(); // Funçao de leitura da distancia
-void loc(); // Funçao de reação dos motores
+//funçao de leitura dos sensores
+void leitura(); 
+
+//funçao de reaçao dos motores
+void loc(); 
 
 void setup(){
   Serial.begin(9600); // Inicia a comunicação serial
 
-  pinMode(S1, OUTPUT);
-  pinMode(S2,OUTPUT);
-  pinMode(S3,OUTPUT);
-  digitalWrite(S1, LOW); // Inicia com o pino em nível baixo
-  digitalWrite(S2, LOW); // Inicia com o pino em nível baixo
-  digitalWrite(S3, LOW); // Inicia com o pino em nível baixo
-  
+  //declarando pinos de saida dos motores
+  pinMode (IN1,OUTPUT); 
+  pinMode (IN2,OUTPUT);
+  pinMode (IN3,OUTPUT);
+  pinMode (IN4,OUTPUT);
+
+  //declarando pinos dos sensores 
+  pinMode (S1, OUTPUT);
+  pinMode (S2,OUTPUT);
+  pinMode (S3,OUTPUT);
+
+  //pinos em nivel baixo
+  digitalWrite (S1, LOW); 
+  digitalWrite (S2, LOW); 
+  digitalWrite (S3, LOW); 
+
+  //enviando sinal logico
+   digitalWrite (EN1,HIGH);
+   digitalWrite (EN2,HIGH);
+   digitalWrite (IN1,LOW);
+   digitalWrite (IN2,LOW);
+   digitalWrite (IN3,LOW);
+   digitalWrite (IN4,LOW);
 }
 
 void loop(){
+
+  //funçoes a serem executadas
   leitura();
   loc();
 
@@ -59,37 +81,55 @@ void loop(){
 }
 
 
-
-}
-
 void leitura(){
-  pinMode(S1, OUTPUT); // Define o pino como saida
-  pinMode(S2, OUTPUT); // Define o pino como saida
-  pinMode(S3, OUTPUT); // Define o pino como saida
-  digitalWrite(S1, HIGH); // Manda um sinal de nível alto por 5 microssegundos
-  digitalWrite(S2, HIGH); // Manda um sinal de nível alto por 5 microssegundos
-  digitalWrite(S3, HIGH); // Manda um sinal de nível alto por 5 microssegundos
+
+//definir como pinos de saída
+  pinMode(S1, OUTPUT); 
+  pinMode(S2, OUTPUT); 
+  pinMode(S3, OUTPUT); 
+
+  //sinal de nivel alto por 5 microssegundos
+  digitalWrite(S1, HIGH); 
+  digitalWrite(S2, HIGH); 
+  digitalWrite(S3, HIGH); 
   delayMicroseconds(5);
+
+  //definir pinos como baixo
   digitalWrite(S1, LOW);
   digitalWrite(S2, LOW);
   digitalWrite(S3, LOW);
 
-  pinMode(S1, INPUT); // Define o pino como entrada para fazer a leitura
-  pinMode(S2, INPUT); // Define o pino como entrada para fazer a leitura
-  pinMode(S3, INPUT); // Define o pino como entrada para fazer a leitura
-  dist1 = pulseIn(S1, HIGH); // Le o comprimento de onda em alta
-  dist2 = pulseIn(S2, HIGH); // Le o comprimento de onda em alta
-  dist3 = pulseIn(S3, HIGH); // Le o comprimento de onda em alta
+//definir pinos como entrada para fazer a leitura
+  pinMode(S1, INPUT); 
+  pinMode(S2, INPUT); 
+  pinMode(S3, INPUT); 
+
+  //le comprimento de onda em alta
+  dist1 = pulseIn(S1, HIGH);
+  dist2 = pulseIn(S2, HIGH); 
+  dist3 = pulseIn(S3, HIGH); 
 }
+
+
 void loc(){
   if(dist1 <= 100 && dist2 >= 100 && dist3 >= 100) //curva esq.
- { }
+   { 
+
+   }
   else if(dist1 <= 100 && dist2 <= 100 && dist3 >= 100) //curva suave esq.
- { }
+ { 
+
+ }
  else if(dist1 >= 100 && dist2 >= 100 && dist3 <= 100)   //curva dir.
- { }
+ { 
+
+ }
  else if(dist1 >= 100 && dist2 <= 100 && dist3 <= 100)  //curva suave dir.
- { }
+ {
+
+  }
  else if(dist1 >= 100 && dist2 <= 100 && dist3 >= 100)  //para frente
- { }
+ {
+
+  }
 }
